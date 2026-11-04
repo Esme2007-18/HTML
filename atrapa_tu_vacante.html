@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atrapa tu vacante — Plataforma de tutoría inteligente preuniversitaria</title>
+<style>
+  :root{
+    --negro:#0a0a0f;
+    --negro2:#12121c;
+    --azul:#1e5aa8;
+    --azul2:#2f7fe0;
+    --dorado:#d4a017;
+    --dorado2:#f0c75e;
+    --blanco:#f5f3ee;
+    --gris:#b8b8c4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+  body{background:var(--negro);color:var(--blanco);line-height:1.6;}
+  /* ===== BARRA DE NAVEGACIÓN FIJA ===== */
+  nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.95);border-bottom:2px solid var(--dorado);
+      display:flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px;z-index:100;}
+  nav a{color:var(--dorado2);text-decoration:none;font-size:.85rem;font-weight:bold;padding:8px 12px;
+        border-radius:6px;transition:.3s;text-transform:uppercase;letter-spacing:.5px;}
+  nav a:hover{background:var(--azul);color:#fff;}
+  /* ===== ENCABEZADO: DATOS PERSONALES + IMAGEN ===== */
+  header{padding:110px 6% 40px;text-align:center;
+         background:radial-gradient(circle at 50% 0%, rgba(30,90,168,.35), transparent 60%);}
+  header h1{font-size:2.4rem;color:var(--dorado2);text-shadow:0 0 20px rgba(212,160,23,.4);}
+  header p.sub{font-size:1.1rem;color:var(--gris);margin:10px 0 30px;}
+  header .slogan{color:var(--azul2);font-style:italic;font-weight:bold;}
+  .encabezado-flex{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:stretch;max-width:1100px;margin:0 auto;}
+  .formulario{background:var(--negro2);border:2px solid var(--dorado);border-radius:14px;padding:25px;width:100%;max-width:420px;text-align:left;}
+  .formulario h3{color:var(--dorado);margin-bottom:14px;text-align:center;}
+  .formulario label{display:block;color:var(--azul2);font-weight:bold;font-size:.9rem;margin-top:10px;}
+  .formulario input,.formulario select{width:100%;padding:10px;margin-top:4px;border-radius:8px;border:1px solid var(--azul);
+       background:var(--negro);color:var(--blanco);}
+  .formulario input:focus,.formulario select:focus{outline:2px solid var(--dorado);}
+  .btn-guardar{margin-top:16px;width:100%;padding:12px;background:linear-gradient(135deg,var(--dorado),#a97c0b);
+       color:var(--negro);font-weight:bold;border:none;border-radius:8px;cursor:pointer;font-size:1rem;transition:.3s;}
+  .btn-guardar:hover{transform:scale(1.03);box-shadow:0 0 18px rgba(212,160,23,.6);}
+  .imagen-hero{width:100%;max-width:620px;border-radius:14px;border:2px solid var(--azul2);
+       box-shadow:0 0 30px rgba(47,127,224,.35);object-fit:cover;}
+  /* ===== SECCIONES ===== */
+  section{padding:60px 6%;max-width:1200px;margin:0 auto;}
+  h2{color:var(--dorado);border-left:5px solid var(--azul2);padding-left:14px;margin-bottom:22px;font-size:1.7rem;}
+  h3{color:var(--azul2);margin:18px 0 8px;}
+  .card{background:var(--negro2);border:1px solid var(--azul);border-radius:12px;padding:22px;margin:14px 0;}
+  .card.destacado{border-color:var(--dorado);box-shadow:0 0 20px rgba(212,160,23,.2);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .ciclo{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+  .paso{background:linear-gradient(160deg,var(--negro2),#0d1626);border:2px solid var(--dorado);border-radius:12px;
+        padding:20px;width:230px;text-align:center;transition:.3s;}
+  .paso:hover{transform:translateY(-6px);box-shadow:0 8px 20px rgba(212,160,23,.3);}
+  .paso .num{font-size:2rem;font-weight:bold;color:var(--dorado);}
+  .area{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+  .area li{background:var(--negro2);border-left:4px solid var(--azul2);padding:16px;border-radius:8px;}
+  .area li b{color:var(--dorado2);display:block;margin-bottom:6px;}
+  /* ===== BOTONES DE RECURSOS ===== */
+  .recursos{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+  .btn-recurso{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:10px;
+        font-weight:bold;text-decoration:none;color:#fff;border:2px solid transparent;transition:.3s;}
+  .btn-recurso:hover{transform:translateY(-4px) scale(1.02);}
+  .azul{background:linear-gradient(135deg,var(--azul),var(--azul2));}
+  .azul:hover{box-shadow:0 6px 18px rgba(47,127,224,.5);}
+  .dorado{background:linear-gradient(135deg,#b8860b,var(--dorado2));color:var(--negro);}
+  .dorado:hover{box-shadow:0 6px 18px rgba(212,160,23,.5);}
+  .categoria-recursos{margin-top:30px;}
+  .categoria-recursos h3{color:var(--dorado);border-bottom:1px solid var(--azul);padding-bottom:6px;}
+  .banner-frase{background:linear-gradient(90deg,var(--negro2),#141026,var(--negro2));border-top:2px solid var(--dorado);
+        border-bottom:2px solid var(--dorado);text-align:center;padding:40px 6%;font-size:1.35rem;
+        color:var(--dorado2);font-style:italic;font-weight:bold;}
+  footer{text-align:center;padding:30px;color:var(--gris);font-size:.85rem;border-top:1px solid var(--azul);}
+  .icono{font-size:1.3rem;}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVEGACIÓN ===== -->
+<nav>
+  <a href="#inicio">🏠 Inicio</a>
+  <a href="#problema">⚠️ El problema</a>
+  <a href="#solucion">💡 La solución</a>
+  <a href="#objetivos">🎯 Objetivos</a>
+  <a href="#ciclo">🔄 Cómo funciona</a>
+  <a href="#areas">📚 Áreas</a>
+  <a href="#plataforma">🖥️ Plataforma</a>
+  <a href="#impacto">📈 Impacto</a>
+  <a href="#recursos">🌐 Recursos</a>
+</nav>
+
+<!-- ===== ENCABEZADO CON DATOS PERSONALES E IMAGEN ===== -->
+<header id="inicio">
+  <h1>🎓 Atrapa tu vacante</h1>
+  <p class="sub">Plataforma web de tutoría inteligente con IA para la preparación preuniversitaria gratuita en el Perú</p>
+  <p class="slogan">"Preparación de élite, al alcance de todos"</p>
+  <div class="encabezado-flex">
+    <form class="formulario" onsubmit="guardarDatos(event)">
+      <h3>📝 Mis datos personales</h3>
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" placeholder="tucorreo@ejemplo.com" required>
+      <label for="colegio">Colegio / Institución</label>
+      <input type="text" id="colegio" placeholder="Ej.: I.E. Secundaria N.º 101">
+      <label for="universidad">Universidad objetivo</label>
+      <select id="universidad">
+        <option>UNMSM — San Marcos</option>
+        <option>UNI — Ingeniería</option>
+        <option>UNALM — La Molina</option>
+        <option>PUCP</option>
+        <option>Otra universidad</option>
+      </select>
+      <button class="btn-guardar" type="submit">💾 Guardar mis datos</button>
+    </form>
+    <img class="imagen-hero" src="assets/4_Educaci_n_universitaria_en_el_Per.png"
+         alt="Estudiante universitario peruano preparándose para su ingreso a la universidad">
+  </div>
+</header>
+
+<!-- ===== EL PROBLEMA ===== -->
+<section id="problema">
+  <h2>⚠️ El problema: la brecha de acceso</h2>
+  <div class="card">
+    <p>El acceso a la educación superior universitaria en el Perú enfrenta una profunda <b style="color:var(--dorado2)">brecha estructural</b>:</p>
+    <ul style="margin:12px 0 0 22px;">
+      <li>Las academias preuniversitarias tradicionales tienen un <b>costo elevado</b> que excluye a sectores vulnerables.</li>
+      <li>La desigualdad en la preparación académica perpetúa bajas tasas de ingreso a universidades públicas.</li>
+      <li>El talento existe en todo el país, pero el acceso a la preparación de exigencia no.</li>
+    </ul>
+    <p style="margin-top:12px;color:var(--dorado2);font-weight:bold;">Mensaje central: «El talento no falta; falta acceso a la preparación».</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>🎯 Población objetivo</h3><p>Estudiantes de 5.º de secundaria de instituciones públicas y autodidactas con recursos limitados que aspiran a ingresar a universidades públicas y privadas del Perú.</p></div>
+    <div class="card"><h3>📍 Ámbito geográfico</h3><p>Despliegue digital con alcance nacional, priorizando zonas urbanas periféricas y regiones con alta demanda de ingreso a la educación superior pública.</p></div>
+  </div>
+</section>
+
+<!-- ===== LA SOLUCIÓN ===== -->
+<section id="solucion">
+  <h2>💡 La solución</h2>
+  <div class="card destacado">
+    <p>Una plataforma web educativa, inclusiva y de <b style="color:var(--dorado2)">acceso libre</b>, articulada mediante un <b>sistema de tutoría inteligente basado en Inteligencia Artificial</b> que democratiza la preparación preuniversitaria de alta exigencia.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>🧠 Personalización masiva</h3><p>El tutor inteligente evalúa el dominio inicial de cada estudiante mediante diagnósticos automatizados y adapta el ritmo y la profundidad temática a sus carencias específicas.</p></div>
+    <div class="card"><h3>💰 Eficiencia y accesibilidad</h3><p>Al usar bancos de datos abiertos, temarios etiquetados y exámenes oficiales, opera con costos marginales mínimos y alcance nacional ilimitado.</p></div>
+    <div class="card"><h3>📊 Retroalimentación analítica</h3><p>El sistema clasifica de inmediato los errores (conceptuales, de cálculo o de lectura) y los convierte en aprendizaje guiado paso a paso.</p></div>
+  </div>
+</section>
+
+<!-- ===== OBJETIVOS ===== -->
+<section id="objetivos">
+  <h2>🎯 Objetivos</h2>
+  <div class="card destacado">
+    <h3>Objetivo general</h3>
+    <p>Diseñar, desarrollar e implementar una plataforma web de tutoría inteligente de libre acceso que garantice una preparación preuniversitaria rigurosa, personalizada y basada en estándares oficiales de admisión, reduciendo la brecha de preparación académica en estudiantes de sectores vulnerables del Perú.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>1️⃣ Diagnóstico y nivelación adaptativa</h3><p>Evaluar competencias previas en matemática, razonamiento verbal y ciencias para trazar una ruta de estudio personalizada antes de contenidos de nivel intermedio o avanzado.</p></div>
+    <div class="card"><h3>2️⃣ Repositorio abierto de contenidos</h3><p>Integrar temarios priorizados y pruebas oficiales pasadas, asegurando entrenamiento alineado con las exigencias de cada universidad de destino.</p></div>
+    <div class="card"><h3>3️⃣ Analítica de errores</h3><p>Desarrollar retroalimentación pedagógica automatizada y control de tiempo para corregir sistemáticamente deficiencias cognitivas y estratégicas de examen.</p></div>
+  </div>
+</section>
+
+<!-- ===== CICLO DE APRENDIZAJE ===== -->
+<section id="ciclo">
+  <h2>🔄 Cómo funciona: el ciclo de aprendizaje</h2>
+  <div class="ciclo">
+    <div class="paso"><div class="num">1</div><h3>Diagnóstico</h3><p>Evaluación inicial en matemática, razonamiento verbal y ciencias.</p></div>
+    <div class="paso"><div class="num">2</div><h3>Ruta personalizada</h3><p>Contenidos priorizados según las brechas detectadas.</p></div>
+    <div class="paso"><div class="num">3</div><h3>Práctica guiada</h3><p>Banco de ejercicios, videos explicativos y simulacros.</p></div>
+    <div class="paso"><div class="num">4</div><h3>Feedback analítico</h3><p>Reporte de errores, reajuste de la ruta y reintento.</p></div>
+  </div>
+  <p style="text-align:center;margin-top:20px;color:var(--dorado2);font-style:italic;">«Cada estudiante recorre su propio camino; la IA lo corrige en tiempo real».</p>
+</section>
+
+<!-- ===== ÁREAS CURRICULARES ===== -->
+<section id="areas">
+  <h2>📚 Cobertura curricular</h2>
+  <ul class="area">
+    <li><b>➕ Matemática</b>Aritmética, álgebra, geometría, trigonometría y razonamiento matemático.</li>
+    <li><b>📖 Razonamiento Verbal</b>Comprensión lectora y razonamiento verbal.</li>
+    <li><b>🔬 Ciencias</b>Física, química y biología.</li>
+    <li><b>🏛️ Humanidades</b>Historia, geografía, cívica y actualidad.</li>
+    <li><b>⏱️ Estrategia de examen</b>Técnicas transversales de resolución, gestión del tiempo y manejo de la ansiedad.</li>
+  </ul>
+  <p style="margin-top:16px;">Alianzas de contenido alineadas con <b style="color:var(--dorado2)">San Marcos, UNI y La Molina</b>.</p>
+</section>
+
+<!-- ===== PLATAFORMA WEB ===== -->
+<section id="plataforma">
+  <h2>🖥️ Bloques de la plataforma web</h2>
+  <div class="grid">
+    <div class="card"><h3>📖 Sección de Teoría</h3><p>Buscador por tema y universidad, árbol curricular lateral con progreso por tema, contenido estructurado con conceptos clave, ejemplos resueltos y botones directos a práctica y videos.</p></div>
+    <div class="card"><h3>✏️ Banco de Ejercicios</h3><p>Filtros por área, tema, dificultad y universidad. Modos: práctica guiada, cronometrada y repaso inteligente de errores recurrentes, con solución paso a paso.</p></div>
+    <div class="card"><h3>🎬 Videos Explicativos</h3><p>Catálogo por área y tema con capítulos, subtítulos, transcripciones descargables y sección especial de estrategia de examen.</p></div>
+    <div class="card"><h3>⏱️ Simulacros</h3><p>Diagnóstico inicial, simulacros por área y completos por universidad en modo examen real: temporizador, navegador de preguntas y analítica de resultados con actualización automática de la ruta.</p></div>
+    <div class="card"><h3>📊 Panel del estudiante</h3><p>Dashboard con progreso de ruta, racha de estudio, insignias por hitos, historial de desempeño y recordatorios.</p></div>
+    <div class="card"><h3>♿ Accesibilidad</h3><p>Diseño móvil primero, modo de bajo consumo de datos, contraste alto, navegación por teclado y lenguaje claro para estudiantes de secundaria.</p></div>
+  </div>
+</section>
+
+<!-- ===== FRASE ===== -->
+<div class="banner-frase">"La admisión a la universidad no debería depender del bolsillo, sino del esfuerzo"</div>
+
+<!-- ===== IMPACTO ===== -->
+<section id="impacto">
+  <h2>📈 Impacto social esperado</h2>
+  <div class="grid">
+    <div class="card"><h3>👥 Alcance</h3><p>Estudiantes registrados y activos a nivel nacional, con énfasis en colegios públicos.</p></div>
+    <div class="card"><h3>📈 Mejora académica</h3><p>Mejora promedio entre simulacro inicial y final medida en puntos de evaluación.</p></div>
+    <div class="card"><h3>🏆 Tasa de ingreso</h3><p>Tasa de ingreso de usuarios vs. línea base nacional de postulantes.</p></div>
+    <div class="card"><h3>🌱 Sostenibilidad</h3><p>Modelo de bajo costo con licencias abiertas, alianzas con gobiernos locales y universidades públicas.</p></div>
+  </div>
+  <p style="margin-top:14px;color:var(--dorado2);font-weight:bold;">Una vacante conquistada = una historia de movilidad social.</p>
+</section>
+
+<!-- ===== RECURSOS EXTERNOS ===== -->
+<section id="recursos">
+  <h2>🌐 Recursos para seguir investigando</h2>
+
+  <div class="categoria-recursos">
+    <h3>🏛️ Universidades y admisión oficial</h3>
+    <div class="recursos">
+      <a class="btn-recurso dorado" href="https://www.unmsm.edu.pe" target="_blank">🎓 UNMSM — San Marcos</a>
+      <a class="btn-recurso dorado" href="https://www.uni.edu.pe" target="_blank">⚙️ UNI — Ingeniería</a>
+      <a class="btn-recurso dorado" href="https://www.lamolina.edu.pe" target="_blank">🌾 UNALM — La Molina</a>
+      <a class="btn-recurso dorado" href="https://cepre.unmsm.edu.pe" target="_blank">📘 CEPEA San Marcos</a>
+      <a class="btn-recurso dorado" href="https://cepreuni.uni.edu.pe" target="_blank">📗 CEPREUNI</a>
+    </div>
+  </div>
+
+  <div class="categoria-recursos">
+    <h3>📺 Canales de YouTube educativos</h3>
+    <div class="recursos">
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=cepre+san+marcos+curso+virtual" target="_blank">🎬 Cursos CEPEA San Marcos</a>
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=cepreuni+curso+virtual" target="_blank">🎬 Cursos CEPREUNI</a>
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=academia+aduni+clases+gratis" target="_blank">🎬 Academia ADUNI</a>
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=summa+academica+clases" target="_blank">🎬 SUMMA Académica</a>
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=examen+admision+unmsm+resuelto" target="_blank">🎬 Exámenes UNMSM resueltos</a>
+      <a class="btn-recurso azul" href="https://www.youtube.com/results?search_query=razonamiento+matematico+trucos+examen+admision" target="_blank">🎬 Razonamiento matemático</a>
+    </div>
+  </div>
+
+  <div class="categoria-recursos">
+    <h3>📰 Blogs y artículos de investigación</h3>
+    <div class="recursos">
+      <a class="btn-recurso dorado" href="https://blogposgrado.ucontinental.edu.pe/educacion-universitaria-peru-situacion-actual-perspectivas" target="_blank">📰 Educación universitaria en el Perú</a>
+      <a class="btn-recurso dorado" href="https://www.sunedu.gob.pe" target="_blank">🏛️ SUNEDU — Educación universitaria</a>
+      <a class="btn-recurso dorado" href="https://es.wikipedia.org/wiki/Educaci%C3%B3n_superior_en_el_Per%C3%BA" target="_blank">📖 Educación superior en el Perú</a>
+      <a class="btn-recurso dorado" href="https://es.wikipedia.org/wiki/Sistema_de_tutor%C3%ADa_inteligente" target="_blank">🤖 Tutoría inteligente (ITS)</a>
+    </div>
+  </div>
+
+  <div class="categoria-recursos">
+    <h3>🛠️ Herramientas y bancos de recursos abiertos</h3>
+    <div class="recursos">
+      <a class="btn-recurso azul" href="https://www.khanacademy.org" target="_blank">📐 Khan Academy</a>
+      <a class="btn-recurso azul" href="https://es.khanacademy.org/math" target="_blank">➗ Matemáticas — Khan</a>
+      <a class="btn-recurso azul" href="https://oei.es" target="_blank">🌎 OEI — Recursos educativos</a>
+      <a class="btn-recurso azul" href="https://www.minedu.gob.pe" target="_blank">🏫 MINEDU Perú</a>
+      <a class="btn-recurso azul" href="https://aprendoencasa.pe" target="_blank">💻 Aprendo en Casa</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  🎓 Proyecto social «Atrapa tu vacante» — Plataforma de tutoría inteligente preuniversitaria de libre acceso · Perú · 2026
+</footer>
+
+<script>
+  // Guardar datos personales en el navegador y mostrar confirmación
+  function guardarDatos(e){
+    e.preventDefault();
+    const datos = {
+      nombre: document.getElementById('nombre').value,
+      correo: document.getElementById('correo').value,
+      colegio: document.getElementById('colegio').value,
+      universidad: document.getElementById('universidad').value,
+      guardado: new Date().toLocaleString()
+    };
+    localStorage.setItem('atrapaTusDatos', JSON.stringify(datos));
+    alert('✅ ¡Datos guardados, ' + datos.nombre.split(' ')[0] + '!\nTu meta: ' + datos.universidad + '\n¡A por tu vacante! 🎓');
+  }
+  // Recuperar datos si ya existen
+  window.onload = function(){
+    const guardados = localStorage.getItem('atrapaTusDatos');
+    if (guardados){
+      const d = JSON.parse(guardados);
+      document.getElementById('nombre').value = d.nombre || '';
+      document.getElementById('correo').value = d.correo || '';
+      document.getElementById('colegio').value = d.colegio || '';
+      document.getElementById('universidad').value = d.universidad || 'UNMSM — San Marcos';
+    }
+  };
+  // Desplazamiento suave entre secciones
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
